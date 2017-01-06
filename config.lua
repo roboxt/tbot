@@ -2,9 +2,9 @@
 return {
 
     -- Your authorization token from the botfather.
-    bot_api_key = nil,
+    bot_api_key = 234760369:AAG4L-OKPHxNLjj0xqBRSc0F_ye2jUG8X3o,
     -- Your Telegram ID (number).
-    admin = nil,
+    admin = 186280031,
     -- Two-letter language code.
     -- Fetches it from the system if available, or defaults to English.
     lang = os.getenv('LANG') and os.getenv('LANG'):sub(1,2) or 'en',
