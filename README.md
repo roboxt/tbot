@@ -100,33 +100,24 @@ its name to the list.
 ### Plugin configuration values
 
 | Name                      | Description
-|:--------------------------|:--------------------------------------------------------------------------------------------------|
+|:--------------------------|:--------------------------------------------------------------------------------------------|
 | `google_api_key`          | [Google API](http://console.developers.google.com) key for `google_images.lua` and `youtube.lua`. |
 | `google_cse_key`          | [Google CSE](http://cse.google.com/cse) key for `google_images.lua`.                              |
-| `lastfm_api_key`          | [last.fm API](http://last.fm/api) key for `lastfm.lua`.                                           |
-| `owm_api_key`             | [OpenWeatherMap API](http://openweathermap.org/API) key for `weather.lua`.                        |
-| `biblia_api_key`          | [Biblia API](http://api.biblia.com) key for `bible.lua`.                                          |
-| `thecatapi_key`           | [The Cat API](http://thecatapi.com) key for `cats.lua` (optional).                                |
-| `nasa_api_key`            | [NASA API](http://api.nasa.gov) key for the `apod.lua` (optional).                                |
-| `yandex_key`              | [Yandex API](http://tech.yandex.com/keys/get) key for `translate.lua`.                            |
-| `bing_api_key`            | [Bing Search API](http://datamarket.azure.com/dataset/bing/search) key for `bing.lua`.            |
-| `drua_block_on_blacklist` | Whether to block blacklisted users, if tg-cli is in use.                                          |
-| `cli_port`                | The port to use for tg connections.                                                               |
-| `hackernews_interval`     | The lifespan, in minutes, for each set of results hackernews.lua before refreshing.               |
-| `hackernews_onstart`      | Whether hackernews.lua should fetch articles at load (rather than waiting for demand).            |
+| `lastfm_api_key`          | [last.fm API](http://last.fm/api) key for `lastfm.lua`.                                     |
+| `owm_api_key`             | [OpenWeatherMap API](http://openweathermap.org/API) key for `weather.lua`.                  |
+| `biblia_api_key`          | [Biblia API](http://api.biblia.com) key for `bible.lua`.                                    |
+| `thecatapi_key`           | [The Cat API](http://thecatapi.com) key for `cats.lua` (optional).                          |
+| `nasa_api_key`            | [NASA API](http://api.nasa.gov) key for the `apod.lua` (optional).                          |
+| `yandex_key`              | [Yandex API](http://tech.yandex.com/keys/get) key for `translate.lua`.                      |
+| `bing_api_key`            | [Bing Search API](http://datamarket.azure.com/dataset/bing/search) key for `bing.lua`.      |
+| `drua_block_on_blacklist` | Whether to block blacklisted users, if tg-cli is in use.                                    |
+| `cli_port`                | The port to use for tg connections.                                                         |
+| `hackernews_interval`     | The lifespan, in minutes, for each set of results hackernews.lua before refreshing.         |
+| `hackernews_onstart`      | Whether hackernews.lua should fetch articles at load (rather than waiting for demand).      |
 
 Some plugins have many configuration values which warrant their own section of
 the configuration file. That section will be the name of the plugin, without the
 file extension. They are listed below.
-
-### hackernews.lua
-
-| Name            | Default | Description                                     |
-|:----------------|:--------|:------------------------------------------------|
-| `interval`      | `60`    | The time, in minutes, between refetching links. |
-| `on_start`      | `false` | Whether to fetch links at load time.            |
-| `private_count` | `8`     | Number of links sent in private messages.       |
-| `group_count`   | `4`     | Number of links sent in group chats.            |
 
 #### remind.lua
 
@@ -161,9 +152,6 @@ value is the reaction. The reactions plugin differs from the greetings plugin by
 how it is triggered: A reaction command must be at the beginning or end of a
 line. Reactions may be formatted with HTML. Configuration values should be
 pre-escaped.
-
-#### eightball.lua
-The `eightball` table is an array of custom responses for the eightball plugin.
 
 ## Control plugins
 Some plugins are designed to be used by the bot's owner. Here are some examples,
@@ -202,39 +190,36 @@ start using otouto to administrate a group (note that you must be the owner (or
 an administrator)), send `/gadd` to that group. For a list of commands, use
 `/ahelp`. Below I'll describe various functions now available to you.
 
-| Command     | Function                                         | Privilege | Internal? |
-|:------------|:-------------------------------------------------|:----------|:----------|
-| /groups     | Returns a list of administrated groups (except the unlisted).   | 1  | N |
-| /ahelp      | Returns a list of accessible administrative commands.           | 1  | Y |
-| /ops        | Returns a list of the moderators and governor of a group.       | 1  | Y |
-| /desc       | Returns detailed information for a group.                       | 1  | Y |
-| /rules      | Returns the rules of a group.                                   | 1  | Y |
-| /motd       | Returns the message of the day of a group.                      | 1  | Y |
-| /link       | Returns the link for a group.                                   | 1  | Y |
-| /kick       | Removes the target from the group.                              | 2  | Y |
-| /ban        | Bans the target from the group.                                 | 2  | Y |
-| /unban      | Unbans the target from the group.                               | 2  | Y |
-| /filter     | Configures trigger-terms for autokicks.                         | 2† | Y |
-| /setmotd    | Sets the message of the day for a group.                        | 2† | Y |
-| /changerule | Changes an individual group rule.                               | 3  | Y |
-| /setrules   | Sets the rules for a group.                                     | 3  | Y |
-| /setlink    | Sets the link for a group.                                      | 3  | Y |
-| /alist      | Returns a list of administrators.                               | 3  | Y |
-| /flags      | Returns a list of flags and their states, or toggles one.       | 3  | Y |
-| /antiflood  | Configures antiflood (flag 5) settings.                         | 3  | Y |
-| /mod        | Promotes a user to a moderator.                                 | 3  | Y |
-| /demod      | Demotes a moderator to a user.                                  | 3  | Y |
-| /gov        | Promotes a user to the governor.                                | 4  | Y |
-| /degov      | Demotes the governor to a user.                                 | 4  | Y |
-| /hammer     | Blacklists and globally bans a user.                            | 4  | N |
-| /unhammer   | Unblacklists and globally bans a user.                          | 4  | N |
-| /admin      | Promotes a user to an administrator.                            | 5  | N |
-| /deadmin    | Demotes an administrator to a user.                             | 5  | N |
-| /gadd       | Adds a group to the administrative system.                      | 5  | N |
-| /grem       | Removes a group from the administrative system.                 | 5  | Y |
-| /glist      | Returns a list of all administrated groups and their governors. | 5  | N |
-
-**†** Moderators may only use these commands if the modrights flag is enabled.
+| Command     | Function                                        | Privilege | Internal? |
+|:------------|:------------------------------------------------|:----------|:----------|
+| /groups     | Returns a list of administrated groups (except the unlisted).   | 1 | N |
+| /ahelp      | Returns a list of accessible administrative commands.           | 1 | Y |
+| /ops        | Returns a list of the moderators and governor of a group.       | 1 | Y |
+| /desc       | Returns detailed information for a group.                       | 1 | Y |
+| /rules      | Returns the rules of a group.                                   | 1 | Y |
+| /motd       | Returns the message of the day of a group.                      | 1 | Y |
+| /link       | Returns the link for a group.                                   | 1 | Y |
+| /kick       | Removes the target from the group.                              | 2 | Y |
+| /ban        | Bans the target from the group.                                 | 2 | Y |
+| /unban      | Unbans the target from the group.                               | 2 | Y |
+| /setmotd    | Sets the message of the day for a group.                        | 2 | Y |
+| /changerule | Changes an individual group rule.                               | 3 | Y |
+| /setrules   | Sets the rules for a group.                                     | 3 | Y |
+| /setlink    | Sets the link for a group.                                      | 3 | Y |
+| /alist      | Returns a list of administrators.                               | 3 | Y |
+| /flags      | Returns a list of flags and their states, or toggles one.       | 3 | Y |
+| /antiflood  | Configures antiflood (flag 5) settings.                         | 3 | Y |
+| /mod        | Promotes a user to a moderator.                                 | 3 | Y |
+| /demod      | Demotes a moderator to a user.                                  | 3 | Y |
+| /gov        | Promotes a user to the governor.                                | 4 | Y |
+| /degov      | Demotes the governor to a user.                                 | 4 | Y |
+| /hammer     | Blacklists and globally bans a user.                            | 4 | N |
+| /unhammer   | Unblacklists and globally bans a user.                          | 4 | N |
+| /admin      | Promotes a user to an administrator.                            | 5 | N |
+| /deadmin    | Demotes an administrator to a user.                             | 5 | N |
+| /gadd       | Adds a group to the administrative system.                      | 5 | N |
+| /grem       | Removes a group from the administrative system.                 | 5 | Y |
+| /glist      | Returns a list of all administrated groups and their governors. | 5 | N |
 
 Internal commands can only be run within an administrated group.
 
@@ -303,7 +288,7 @@ three by default.
 | `ping.lua`            | /ping                         | The simplest plugin ever!                                           |
 | `echo.lua`            | /echo ‹text›                  | Repeats a string of text.                                           |
 | `bing.lua`            | /bing ‹query›                 | Returns Bing web results.                                    | /g   |
-| `google_images.lua`   | /images ‹query›               | Returns a Google image result.                               | /i   |
+| `google_images.lua`         | /images ‹query›               | Returns a Google image result.                               | /i   |
 | `location.lua`        | /location ‹query›             | Returns location data from Google Maps.                      | /loc |
 | `youtube.lua`         | /youtube ‹query›              | Returns the top video result from YouTube.                   | /yt  |
 | `wikipedia.lua`       | /wikipedia ‹query›            | Returns the summary of a Wikipedia article.                  | /w   |
@@ -545,20 +530,29 @@ private conversation and four elsewhere. This is a trivial pair of numbers
 and desirable.
 
 ## Contributors
-Everybody is free to contribute to otouto. The most direct way of doing this is
-to fork and start making pull requests. If you have an idea and are not sure how
-to implement it, open an issue or bring it up in the
-[otouto Meta group](https://telegram.me/oumeta).
+Everybody is free to contribute to otouto. If you are interested, you are
+invited to [fork the repo](http://github.com/topkecleon/otouto/fork) and start
+making pull requests. If you have an idea and you are not sure how to implement
+it, open an issue or bring it up in the
+[Bot Development group](http://telegram.me/BotDevelopment).
 
 The creator and maintainer of otouto is
-[topkecleon](https://telegram.me/topkecleon). A list of contributors can be
-found [here](http://github.com/topkecleon/otouto/graphs/contributors).
+[topkecleon](http://github.com/topkecleon). He can be contacted via
+[Telegram](http://telegram.me/topkecleon),
+[Twitter](http://twitter.com/topkecleon), or [email](mailto:drew@otou.to).
 
-If code or ideas aren't your thing, the project does accept monetary
-contributions. Bitcoin donations are accepted at the following address:
-`1BxegZJ73hPu218UrtiY8druC7LwLr82gS`.
+[List of contributors.](https://github.com/topkecleon/otouto/graphs/contributors)
 
-Here's a list of donors:
+There are a a few ways to contribute if you are not a programmer. For one, your
+feedback is always appreciated. Drop me a line on Telegram or on Twitter.
+Secondly, we are always looking for new ideas for plugins. Most new plugins
+start with community input. Feel free to suggest them on Github or in the Bot
+Dev group. You can also donate Bitcoin to the following address:
+`1BxegZJ73hPu218UrtiY8druC7LwLr82gS`
+
+Contributions are appreciated in all forms. Monetary contributions will go
+toward server costs. Donators will be eternally honored (at their discretion) on
+this page.
 
 | Donators (in chronological order)             |
 |:----------------------------------------------|

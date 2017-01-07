@@ -2,9 +2,9 @@
 return {
 
     -- Your authorization token from the botfather.
-    bot_api_key = 234760369:AAG4L-OKPHxNLjj0xqBRSc0F_ye2jUG8X3o,
-    -- Your Telegram ID (number).
-    admin = 186280031,
+    bot_api_key = nil,
+    -- Your Telegram ID.
+    admin = nil,
     -- Two-letter language code.
     -- Fetches it from the system if available, or defaults to English.
     lang = os.getenv('LANG') and os.getenv('LANG'):sub(1,2) or 'en',
@@ -53,24 +53,15 @@ Send /help to get started.
     nasa_api_key = nil,
     -- http://tech.yandex.com/keys/get
     yandex_key = nil,
+    -- Interval (in minutes) for hackernews.lua to update.
+    hackernews_interval = 60,
+    -- Whether hackernews.lua should update at load/reload.
+    hackernews_onstart = false,
     -- Whether luarun should use serpent instead of dkjson for serialization.
     luarun_serpent = false,
 
-    hackernews = {
-        -- Interval (in minutes) for hackernews.lua to fetch new posts.
-        -- This only triggers when someone runs the command; not as a cron job.
-        interval = 60,
-        -- Whether hackernews.lua should cache posts at load time.
-        on_start = false,
-        -- Max number of posts fetched, and number sent in PM.
-        private_count = 8,
-        -- Number of posts sent in groups.
-        group_count = 4
-    },
-
     remind = {
-        -- Should reminders be saved if they fail to send?
-        persist = false,
+        persist = true,
         max_length = 1000,
         max_duration = 526000,
         max_reminders_group = 10,
@@ -168,7 +159,7 @@ Send /help to get started.
         'about',
         'calc',
         'cats',
-        'hexcolor',
+        'colorhex',
         'commit',
         'control',
         'currency',
